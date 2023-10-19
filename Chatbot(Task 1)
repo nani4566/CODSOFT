@@ -1,0 +1,55 @@
+# Chatbot
+import nltk
+from nltk.chat.util import Chat, reflections
+import datetime
+pairs = [
+    [
+        r"(hi|hello|hey|greetings)(.*)",
+        ["Hello!", "Hi there!", "Hello, how can I help you today?"],
+    ],
+    [
+        r"(.*)help(.*)",
+        ["Sure, I can help you. What do you need assistance with?", "How can I assist you today?"],
+    ],
+    [
+        r"(.*)your name(.*)",
+        ["I'm just a chatbot, so I don't have a name. But you can call me ChatGPT."],
+    ],
+     [
+        r"(what is the current date|date)(.*)",
+        ["The current date is " + datetime.datetime.now().strftime("%A, %B %d, %Y")],
+    ],
+    [
+        r"(what is the current time|time)(.*)",
+        ["The current time is " + datetime.datetime.now().strftime("%I:%M %p")],
+    ],
+    [
+        r"(.*)thanks(.*)",
+        ["You're welcome!", "No problem, happy to help."],
+    ],
+    [
+        r"(what do you love the most)(.*)",
+        ["Battery"],
+    ],
+    [
+        r"(tell me a joke)(.*)",
+        ["Why don't scientists trust atoms?Because they make up everything!"],
+    ],
+    [
+        r"(bye|goodbye|exit|quit)(.*)",
+        ["Goodbye!", "See you later.", "Have a great day!"],
+    ],
+]
+chatbot = Chat(pairs, reflections)
+def chat_with_bot():
+    print("Hello! I'm a simple chatbot. Type 'exit' to end the conversation.")
+    while True:
+        user_input = input("You: ")
+        if user_input.lower() == "exit":
+            print("Chatbot: Goodbye!")
+            break
+        response = chatbot.respond(user_input)
+        print("Chatbot:", response)
+if __name__ == "__main__":
+    chat_with_bot()
+
